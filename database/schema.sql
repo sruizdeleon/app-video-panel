@@ -1,8 +1,8 @@
 -- Creating the data base
-CREATE DATABASE app_prueba_tecnica;
+CREATE DATABASE db_video_panel;
 
 -- Selecting the data base
-USE app_prueba_tecnica;
+USE db_video_panel;
 
 -- Creating the diferents tables
 
