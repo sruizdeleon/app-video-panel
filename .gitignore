@@ -1,0 +1,27 @@
+# Logs and temp files
+writable/logs/*
+!writable/logs/index.html
+writable/cache/*
+!writable/cache/index.html
+writable/debugbar/*
+!writable/debugbar/index.html
+writable/sessions/*
+!writable/sessions/index.html
+
+# Environment files
+.env
+.env.*
+
+# Composer dependencies
+/vendor
+
+# Node dependencies
+/node_modules
+
+# IDEs and editors
+*.sublime-project
+*.sublime-workspace
+*.vscode
+/.idea
+.DS_Store
+Thumbs.db
