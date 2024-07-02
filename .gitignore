@@ -25,3 +25,15 @@ writable/sessions/*
 /.idea
 .DS_Store
 Thumbs.db
+
+# PHPStorm
+.idea
+*.iml
+
+# CodeIgniter specific
+**/logs/
+**/cache/
+**/debugbar/
+**/sessions/
+**/vendor/
+**/node_modules/
