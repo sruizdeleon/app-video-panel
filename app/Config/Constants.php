@@ -92,7 +92,3 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
-
-$baseURL= 'http://'.$_SERVER['HTTP_HOST'];
-$baseURL .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-define('BASE_URL', $baseURL);
