@@ -19,12 +19,17 @@ class Login extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        $result = $userModel->where('email', $email)->first();
+        if (!is_string($password) || empty($password)) {
+            echo 'Invalid user name or password';
+            return;
+        }
 
-        if($result->id > 0) {
-            if(password_verify($password, $result->password)) {
+        $user = $userModel->where('email', $email)->first();
 
-                $this->session->set('user_id', $result->id);
+        if($user->id > 0) {
+            if(password_verify($password, $user->password)) {
+
+                $this->session->set('user', $user->id);
                 return redirect()->to('/dashboard');
 
             } else {
