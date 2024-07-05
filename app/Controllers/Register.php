@@ -28,7 +28,7 @@ class Register extends BaseController
             return;
         }
 
-        $password = password_hash($password, PASSWORD_BCRYPT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         $data = [
             'name' => $name,

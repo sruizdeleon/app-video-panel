@@ -4,8 +4,8 @@ USE db_video_panel;
 -- Inserting users data
 INSERT INTO users (id, email, name, surname, avatar, password, role)
 VALUES
-  (1, 'fran@mail.com', 'Francisco', 'Garcia Moreno', 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png', '12345', 'user'),
-  (2, 'sergio@mail.com', 'Sergio', 'Ruiz', 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png', '12345', 'admin');
+  (1, 'fran@mail.com', 'Francisco', 'Garcia Moreno', 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png', '$2y$10$.0BmjlHqpr9g/lrfkrot.eOKZ5HrY6T0ogixMgeA25pgtp/mORD4q', 'user'),
+  (2, 'sergio@mail.com', 'Sergio', 'Ruiz', 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png', '$2y$10$TKtomxAWlTb76VlHboZU5.gRoKSAG1xjSV45sRRLhLsWtf.BgKfKK', 'admin');
 
 -- Inserting videos data
 INSERT INTO videos (id, title, url, date, user_id)

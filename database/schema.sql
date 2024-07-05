@@ -13,7 +13,7 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   surname VARCHAR(255) NOT NULL,
   avatar VARCHAR(255),
-  password VARCHAR(20) NOT NULL,
+  password VARCHAR(255) NOT NULL,
   role ENUM('admin', 'user') NOT NULL
 );
 

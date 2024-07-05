@@ -42,7 +42,7 @@ class Login extends BaseController
 
     }
 
-    public function logout() {
+    public function doLogout() {
         $this->session->destroy();
         return redirect()->to('/login');
     }
