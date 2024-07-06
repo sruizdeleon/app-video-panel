@@ -1,29 +1,37 @@
 <main>
   <section class="container">
-    <h1>Welcome, <?= esc($user->name); ?></h1>
+    <?php if (isset($user)) : ?>
+      <h1>Welcome, <?= esc($user['user']->name); ?></h1>
+    <?php else : ?>
+      <h1>Welcome!</h1>
+    <?php endif; ?>
     <?php if (session()->getFlashdata('msg')) : ?>
       <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
     <?php endif; ?>
-    <!-- 16:9 aspect ratio -->
     <article class="container">
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=jnjjzATOgIM"></iframe>
-      </div>
-      <h2><? session('video')->title; ?></h2>
-    </article>
-    <article class="container">
-      <form action="<?= base_url("changeVideo"); ?>" method="post">
-        <h3>Change your video</h3>
-        <div class="form-group">
-          <label for="title">Video title</label>
-          <input placeholder="New title" id="title" name="title" class="form-control" type="text">
-        </div>
-        <div class="form-group">
-          <label for="url">Video URL</label>
-          <input placeholder="https://youtube.com..." id="url" name="url" class="form-control" type="url">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit changes</button>
-      </form>
+      <?php if ($video) : ?>
+        <article class="container">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src=""></iframe>
+          </div>
+          <iframe width="560" height="315" src="<?= esc($video['url']); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <h2><?= esc($video['title']); ?></h2>
+          <p><?= esc($video['date']); ?></p>
+          <a class="btn btn-primary" href="<?= base_url('dashboard/update-video') ?>">Edit</a>
+        </article>
+      <?php else : ?>
+        <h2>Haven't you uploaded your favorite video yet? Click add and upload yours.</h2>
+        <form action="<?= base_url('dashboard/createVideo') ?>" method="post">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="url" class="form-label">URL</label>
+            <input type="url" class="form-control" id="url" name="url" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        <?php endif; ?>
     </article>
   </section>
 </main>
