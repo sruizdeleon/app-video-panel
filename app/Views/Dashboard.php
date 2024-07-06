@@ -1,6 +1,6 @@
 <main>
   <section class="container">
-    <h1>Welcome, <?session('user')->name;?></h1>
+    <h1>Welcome, <?= esc($user->name); ?></h1>
     <?php if (session()->getFlashdata('msg')) : ?>
       <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
     <?php endif; ?>

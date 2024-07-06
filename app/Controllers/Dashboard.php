@@ -8,7 +8,7 @@ class Dashboard extends BaseController
     public function index(): string
     {
         $pageTitle = ['title' => 'Dashboard'];
-        $user = $this->session->get('user');
+        $user = ['user' => $this->session->get('user')];
 
         if(!$this->session->has('user')) {
             return redirect()->to('/login');

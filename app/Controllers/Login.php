@@ -31,7 +31,7 @@ class Login extends BaseController
         if($user->id > 0) {
             if(password_verify($password, $user->password)) {
 
-                $this->session->set('user', $user->id);
+                $this->session->set('user', $user);
                 return redirect()->to('/dashboard');
 
             } else {
