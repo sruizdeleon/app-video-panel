@@ -6,7 +6,12 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        echo view('common/Header');
-        return view('Home');
+
+        $pageTitle = ['title' => 'Home'];
+        $structure = view('common/Header', $pageTitle) . view('home');
+
+        return $structure;
+
+
     }
 }

@@ -8,8 +8,10 @@ class Login extends BaseController
 {
     public function index(): string
     {
-        echo view('common/Header');
-        return view('Login');
+        $pageTitle = ['title' => 'Login'];
+        $structure = view('common/Header', $pageTitle) . view('login');
+
+        return $structure;
     }
 
     public function doLogin() {

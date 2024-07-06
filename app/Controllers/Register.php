@@ -8,8 +8,12 @@ class Register extends BaseController
 {
     public function index(): string
     {
-        echo view('common/Header');
-        return view('Register');
+
+        $pageTitle = ['title' => 'Register'];
+        $structure = view('common/Header', $pageTitle) . view('register');
+
+        return $structure;
+
     }
 
     public function doRegister()
