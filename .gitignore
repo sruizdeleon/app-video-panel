@@ -5,8 +5,8 @@ writable/cache/*
 !writable/cache/index.html
 writable/debugbar/*
 !writable/debugbar/index.html
-writable/sessions/*
-!writable/sessions/index.html
+writable/session/*
+!writable/session/index.html
 
 # Environment files
 .env
