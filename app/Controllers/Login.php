@@ -8,8 +8,10 @@ class Login extends BaseController
 {
     public function index(): string
     {
-        echo view('common/Header');
-        return view('Login');
+        $pageTitle = ['title' => 'Login'];
+        $structure = view('common/Header', $pageTitle) . view('login');
+
+        return $structure;
     }
 
     public function doLogin() {
@@ -29,7 +31,7 @@ class Login extends BaseController
         if($user->id > 0) {
             if(password_verify($password, $user->password)) {
 
-                $this->session->set('user', $user->id);
+                $this->session->set('user', $user);
                 return redirect()->to('/dashboard');
 
             } else {
