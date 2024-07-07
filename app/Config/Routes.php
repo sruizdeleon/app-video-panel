@@ -20,5 +20,5 @@ $routes->post('/logout', 'Login::doLogout');
 $routes->post('/register', 'Register::doRegister');
 $routes->post('/dashboard/createVideo', 'Video::createVideo');
 $routes->post('/dashboard/updateVideo', 'Video::updateVideo');
-$routes->post('/users-management/edit/(:num)', 'UsersManagement::editUser/$1');
+$routes->post('/users-management/editUser/(:num)', 'UsersManagement::editUser/$1');
 

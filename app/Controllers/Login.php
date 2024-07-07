@@ -45,10 +45,10 @@ class Login extends BaseController
                 return redirect()->to('/dashboard');
 
             } else {
-                echo 'Invalid user name or password';
+                return redirect()->to('/login')->with('msg', 'Invalid user name or password');
             }
         } else {
-            echo 'Invalid user name or password';
+            return redirect()->to('/login')->with('msg', 'Invalid user name or password');
         }
 
 

@@ -1,7 +1,7 @@
 <main>
   <div class="container">
     <h2>Edit User</h2>
-    <form action="<?= base_url('users-management/edit/' . $userToUpdate->id) ?>" method="post">
+    <form action="<?= base_url('users-management/editUser/' . $userToUpdate->id) ?>" method="post">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" value="<?= esc($userToUpdate->name) ?>">
