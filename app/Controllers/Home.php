@@ -7,11 +7,15 @@ class Home extends BaseController
     public function index(): string
     {
 
-        $pageTitle = ['title' => 'Home'];
-        $structure = view('common/Header', $pageTitle) . view('home');
+        $user = $this->session->get('user');
 
+        $data = [
+            'pageTitle' => 'Home',
+            'user' => $user,
+        ];
+
+        $structure = view('common/Header', $data) . view('home');
         return $structure;
-
 
     }
 }

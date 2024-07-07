@@ -6,12 +6,21 @@ use App\Models\UserModel;
 
 class Register extends BaseController
 {
-    public function index(): string
+    public function index()
     {
 
-        $pageTitle = ['title' => 'Register'];
-        $structure = view('common/Header', $pageTitle) . view('register');
+        if ($this->session->has('user')) {
+            return redirect()->to('/dashboard');
+        }
 
+        $user = $this->session->get('user');
+
+        $data = [
+            'pageTitle' => 'Register',
+            'user' => $user,
+        ];
+
+        $structure = view('common/Header', $data) . view('register');
         return $structure;
 
     }

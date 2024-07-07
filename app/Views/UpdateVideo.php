@@ -1,4 +1,7 @@
 <main class="container">
+  <?php if (session()->getFlashdata('msg')) : ?>
+    <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+  <?php endif; ?>
   <form action="<?= base_url('dashboard/updateVideo') ?>" method="post">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
