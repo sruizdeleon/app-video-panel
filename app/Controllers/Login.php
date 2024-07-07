@@ -6,11 +6,21 @@ use App\Models\UserModel;
 
 class Login extends BaseController
 {
-    public function index(): string
+    public function index()
     {
-        $pageTitle = ['title' => 'Login'];
-        $structure = view('common/Header', $pageTitle) . view('login');
 
+        if ($this->session->has('user')) {
+            return redirect()->to('/dashboard');
+        }
+
+        $user = $this->session->get('user');
+
+        $data = [
+            'pageTitle' => 'Login',
+            'user' => $user,
+        ];
+
+        $structure = view('common/Header', $data) . view('login');
         return $structure;
     }
 

@@ -12,24 +12,24 @@ class Video extends BaseController
     helper('url_Helper');
   }
 
-  public function index(): string
+  public function index()
   {
     if (!$this->session->has('user')) {
       return redirect()->to('/login');
     }
 
-    $pageTitle = ['title' => 'Update Video'];
-    $user = ['user' => $this->session->get('user')];
+    $user = $this->session->get('user');
 
     $videoModel = new VideoModel();
-    $video = $videoModel->where('user_id', $user['user']->id)->first();
+    $video = $videoModel->where('user_id', $user->id)->first();
 
     $data = [
+      'pageTitle' => 'Update Video',
       'user' => $user,
       'video' => $video,
     ];
 
-    $structure = view('common/Header', $pageTitle) . view('UpdateVideo', $data);
+    $structure = view('common/Header', $data) . view('UpdateVideo', $data);
     return $structure;
   }
 
@@ -39,6 +39,11 @@ class Video extends BaseController
 
   public function createVideo()
   {
+
+    if (!$this->session->has('user')) {
+      return redirect()->to('/login');
+    }
+
     $videoModel = new VideoModel();
 
     $title = $this->request->getPost('title');

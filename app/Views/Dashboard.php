@@ -1,7 +1,7 @@
 <main>
   <section class="container">
     <?php if (isset($user)) : ?>
-      <h1>Welcome, <?= esc($user['user']->name); ?></h1>
+      <h1>Welcome, <?= esc($user->name); ?></h1>
     <?php else : ?>
       <h1>Welcome!</h1>
     <?php endif; ?>
