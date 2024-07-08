@@ -4,7 +4,7 @@
     <?php if (session()->getFlashdata('msg')) : ?>
       <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
     <?php endif; ?>
-    <form action="<?= base_url("register"); ?>" method="post">
+    <form action="<?= base_url("/management/create/users"); ?>" method="post">
       <div class="form-group">
         <label for="name">Nombre:</label>
         <input type="name" class="form-control" id="name" name="name" required>

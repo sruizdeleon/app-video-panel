@@ -8,8 +8,27 @@ use App\Models\VideoModel;
 class UsersManagement extends BaseController
 {
 
-
   public function index()
+  {
+
+    if ($this->session->has('user')) {
+      return redirect()->to('/dashboard');
+    }
+
+    $user = $this->session->get('user');
+
+    $data = [
+      'pageTitle' => 'Register',
+      'user' => $user,
+    ];
+
+    $structure = view('common/Header', $data) . view('register');
+    return $structure;
+  }
+
+
+
+  public function managementPage()
   {
 
     if (!$this->session->has('user')) {
@@ -34,6 +53,67 @@ class UsersManagement extends BaseController
 
     $structure = view('common/Header', $data) . view('usersmanagement', $data);
     return $structure;
+  }
+
+
+
+  public function createUser()
+  {
+
+    if (!$this->session->has('user')) {
+      return redirect()->to('/dashboard');
+    }
+
+    $user = $this->session->get('user');
+
+    $userModel = new UserModel();
+    $name = $this->request->getPost('name');
+    $surname = $this->request->getPost('surname');
+    $email = $this->request->getPost('email');
+    $password = $this->request->getPost('password');
+    $avatar = $this->request->getPost('avatar');
+    $role = $this->request->getPost('role');
+
+
+    if (!is_string($password) || empty($password)) {
+      echo 'Invalid user name or password';
+      return;
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+
+    if ($user->role == 'admin') {
+      $data = [
+        'name' => $name,
+        'surname' => $surname,
+        'email' => $email,
+        'password' => $password,
+        'avatar' => $avatar,
+        'role' => $role,
+      ];
+    } else {
+      $data = [
+        'name' => $name,
+        'surname' => $surname,
+        'email' => $email,
+        'password' => $password,
+        'avatar' => $avatar,
+        'role' => 'user',
+      ];
+    }
+
+    $result = $userModel->insert($data);
+
+    if ($result) {
+      if ($user->role == 'admin') {
+        return redirect()->to('/management/users')->with('msg', 'User created successfully');
+      } else {
+        return redirect()->to('login')->with('msg', 'User created successfully.');
+      }
+    } else {
+      return redirect()->back()->with('msg', 'Error registering the user');
+    }
   }
 
 

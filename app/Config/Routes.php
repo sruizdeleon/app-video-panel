@@ -7,11 +7,11 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Login::index');
-$routes->get('/register', 'Register::index');
+$routes->get('/register', 'UsersManagement::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
 // Users
-$routes->get('/management/users', 'UsersManagement::index');
+$routes->get('/management/users', 'UsersManagement::managementPage');
 $routes->get('/users-management/editPage/(:num)', 'UsersManagement::editPage/$1');
 $routes->get('/users-management/delete/(:num)', 'UsersManagement::delete/$1');
 
@@ -28,8 +28,8 @@ $routes->post('/logout', 'Login::doLogout');
 
 
 // Users POST
-$routes->post('/register', 'Register::doRegister');
-$routes->post('/users-management/editUser/(:num)', 'UsersManagement::editUser/$1');
+$routes->post('/management/create/users', 'UsersManagement::createUser');
+$routes->post('/management/edit/users/(:num)', 'UsersManagement::editUser/$1');
 
 // Videos POST
 $routes->post('/management/create/videos', 'VideosManagement::createVideo');
