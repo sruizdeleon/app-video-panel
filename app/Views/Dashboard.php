@@ -17,11 +17,11 @@
           <iframe width="560" height="315" src="<?= esc($video['url']); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           <h2><?= esc($video['title']); ?></h2>
           <p><?= esc($video['date']); ?></p>
-          <a class="btn btn-primary" href="<?= base_url('dashboard/update-video') ?>">Edit</a>
+          <a class="btn btn-primary" href="<?= base_url('/management/edit/videos/'.$video['id']) ?>">Edit</a>
         </article>
       <?php else : ?>
         <h2>Haven't you uploaded your favorite video yet? Click add and upload yours.</h2>
-        <form action="<?= base_url('dashboard/createVideo') ?>" method="post">
+        <form action="<?= base_url('/management/create/videos') ?>" method="post">
           <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" name="title" required>
