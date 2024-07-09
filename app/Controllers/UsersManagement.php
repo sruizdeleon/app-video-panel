@@ -9,7 +9,31 @@ class UsersManagement extends BaseController
 {
 
 
+  // REGISTER PAGE
+
   public function index()
+  {
+
+    if ($this->session->has('user')) {
+      return redirect()->to('/dashboard');
+    }
+
+    $user = $this->session->get('user');
+
+    $data = [
+      'pageTitle' => 'Register',
+      'user' => $user,
+    ];
+
+    $structure = view('common/Header', $data) . view('register');
+    return $structure;
+  }
+
+
+
+  // MANAGEMENT USERS PAGE
+
+  public function managementPage()
   {
 
     if (!$this->session->has('user')) {
@@ -39,6 +63,31 @@ class UsersManagement extends BaseController
 
 
 
+  // FORM PAGES
+
+  public function createPage()
+  {
+    if (!$this->session->has('user')) {
+      return redirect()->to('/login');
+    }
+
+    $user = $this->session->get('user');
+
+    if (isset($user) && esc($user->role) && $user->role !== 'admin'){
+      return redirect()->to('/dashboard');
+    }
+
+    $data = [
+      'pageTitle' => 'Create User',
+      'user' => $user
+    ];
+
+    $structure = view('common/Header', $data) . view('UserForm', $data);
+    return $structure;
+  }
+
+
+
   public function editPage($id)
   {
     if (!$this->session->has('user')) {
@@ -54,17 +103,79 @@ class UsersManagement extends BaseController
       return redirect()->to('/management/users')->with('msg', 'User not found');
     }
 
+
     $data = [
       'pageTitle' => 'Edit User',
       'user' => $user,
       'userToUpdate' => $userToUpdate,
     ];
 
-    $structure = view('common/Header', $data) . view('updateuser', $data);
+
+    $structure = view('common/Header', $data) . view('UserForm', $data);
     return $structure;
   }
 
 
+
+
+
+
+// CRUD USERS
+
+
+  public function createUser()
+  {
+
+    $user = $this->session->get('user');
+
+    $userModel = new UserModel();
+    $name = $this->request->getPost('name');
+    $surname = $this->request->getPost('surname');
+    $email = $this->request->getPost('email');
+    $password = $this->request->getPost('password');
+    $avatar = $this->request->getPost('avatar');
+    $role = $this->request->getPost('role');
+
+
+    if (!is_string($password) || empty($password)) {
+      return redirect()->back()->with('msg', 'Wrong format password.');
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+
+    if (isset($user) && esc($user->role) && $user->role === 'admin') {
+      $data = [
+        'name' => $name,
+        'surname' => $surname,
+        'email' => $email,
+        'password' => $password,
+        'avatar' => $avatar,
+        'role' => $role,
+      ];
+    } else {
+      $data = [
+        'name' => $name,
+        'surname' => $surname,
+        'email' => $email,
+        'password' => $password,
+        'avatar' => $avatar,
+        'role' => 'user',
+      ];
+    }
+
+    $result = $userModel->insert($data);
+
+    if ($result) {
+      if (isset($user) && esc($user->role) && $user->role == 'admin') {
+        return redirect()->to('/management/users')->with('msg', 'User created successfully');
+      } else {
+        return redirect()->to('login')->with('msg', 'User created successfully.');
+      }
+    } else {
+      return redirect()->back()->with('msg', 'Error registering the user');
+    }
+  }
 
 
   public function editUser($id) {
