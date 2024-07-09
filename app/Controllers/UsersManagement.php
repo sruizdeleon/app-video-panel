@@ -8,6 +8,9 @@ use App\Models\VideoModel;
 class UsersManagement extends BaseController
 {
 
+
+  // REGISTER PAGE
+
   public function index()
   {
 
@@ -27,6 +30,8 @@ class UsersManagement extends BaseController
   }
 
 
+
+  // MANAGEMENT USERS PAGE
 
   public function managementPage()
   {
@@ -57,12 +62,69 @@ class UsersManagement extends BaseController
 
 
 
-  public function createUser()
-  {
 
+  // FORM PAGES
+
+  public function createPage()
+  {
+    if (!$this->session->has('user')) {
+      return redirect()->to('/login');
+    }
+
+    $user = $this->session->get('user');
+
+    if (isset($user) && esc($user->role) && $user->role !== 'admin'){
+      return redirect()->to('/dashboard');
+    }
+
+    $data = [
+      'pageTitle' => 'Create User',
+      'user' => $user
+    ];
+
+    $structure = view('common/Header', $data) . view('UserForm', $data);
+    return $structure;
+  }
+
+
+
+  public function editPage($id)
+  {
     if (!$this->session->has('user')) {
       return redirect()->to('/dashboard');
     }
+
+    $user = $this->session->get('user');
+
+    $userModel = new UserModel();
+    $userToUpdate = $userModel->find($id);
+
+    if (!$userToUpdate) {
+      return redirect()->to('/management/users')->with('msg', 'User not found');
+    }
+
+
+    $data = [
+      'pageTitle' => 'Edit User',
+      'user' => $user,
+      'userToUpdate' => $userToUpdate,
+    ];
+
+
+    $structure = view('common/Header', $data) . view('UserForm', $data);
+    return $structure;
+  }
+
+
+
+
+
+
+// CRUD USERS
+
+
+  public function createUser()
+  {
 
     $user = $this->session->get('user');
 
@@ -76,14 +138,13 @@ class UsersManagement extends BaseController
 
 
     if (!is_string($password) || empty($password)) {
-      echo 'Invalid user name or password';
-      return;
+      return redirect()->back()->with('msg', 'Wrong format password.');
     }
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
 
-    if ($user->role == 'admin') {
+    if (isset($user) && esc($user->role) && $user->role === 'admin') {
       $data = [
         'name' => $name,
         'surname' => $surname,
@@ -106,7 +167,7 @@ class UsersManagement extends BaseController
     $result = $userModel->insert($data);
 
     if ($result) {
-      if ($user->role == 'admin') {
+      if (isset($user) && esc($user->role) && $user->role == 'admin') {
         return redirect()->to('/management/users')->with('msg', 'User created successfully');
       } else {
         return redirect()->to('login')->with('msg', 'User created successfully.');
@@ -115,36 +176,6 @@ class UsersManagement extends BaseController
       return redirect()->back()->with('msg', 'Error registering the user');
     }
   }
-
-
-
-
-  public function editPage($id)
-  {
-    if (!$this->session->has('user')) {
-      return redirect()->to('/dashboard');
-    }
-
-    $user = $this->session->get('user');
-
-    $userModel = new UserModel();
-    $userToUpdate = $userModel->find($id);
-
-    if (!$userToUpdate) {
-      return redirect()->to('/management/users')->with('msg', 'User not found');
-    }
-
-    $data = [
-      'pageTitle' => 'Edit User',
-      'user' => $user,
-      'userToUpdate' => $userToUpdate,
-    ];
-
-    $structure = view('common/Header', $data) . view('updateuser', $data);
-    return $structure;
-  }
-
-
 
 
   public function editUser($id) {

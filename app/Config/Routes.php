@@ -12,8 +12,9 @@ $routes->get('/dashboard', 'Dashboard::index');
 
 // Users
 $routes->get('/management/users', 'UsersManagement::managementPage');
-$routes->get('/users-management/editPage/(:num)', 'UsersManagement::editPage/$1');
-$routes->get('/users-management/delete/(:num)', 'UsersManagement::delete/$1');
+$routes->get('/management/create/users', 'UsersManagement::createPage');
+$routes->get('/management/edit/users/(:num)', 'UsersManagement::editPage/$1');
+$routes->get('/management/delete/users/(:num)', 'UsersManagement::delete/$1');
 
 // Videos GET
 $routes->get('/management/videos', 'VideosManagement::index');

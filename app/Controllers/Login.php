@@ -38,7 +38,7 @@ class Login extends BaseController
 
         $user = $userModel->where('email', $email)->first();
 
-        if($user->id > 0) {
+        if(isset($user) && esc($user->id) && $user->id > 0) {
             if(password_verify($password, $user->password)) {
 
                 $this->session->set('user', $user);
