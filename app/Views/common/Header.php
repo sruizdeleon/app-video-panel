@@ -40,6 +40,11 @@
         <?php if (isset($user)) : ?>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="<?= base_url("profile"); ?>">
+                <img src="<?= esc($user->avatar); ?>" alt="Avatar" class="rounded-circle" style="width: 30px;"> <?= esc($user->email); ?>
+              </a>
+            </li>
+            <li class="nav-item">
               <form action="<?= base_url("logout") ?>" method="post">
                 <button type="submit" class="btn btn-primary">Logout</button>
               </form>

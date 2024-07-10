@@ -51,7 +51,7 @@ class UsersManagement extends BaseController
     $data['users'] = $users;
 
     $data = [
-      'pageTitle' => 'Dashboard',
+      'pageTitle' => 'Users Management',
       'user' => $user,
       'users' => $users,
     ];
