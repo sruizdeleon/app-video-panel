@@ -9,6 +9,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Login::index');
 $routes->get('/register', 'UsersManagement::index');
 $routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/profile', 'Profile::index');
 
 // Users
 $routes->get('/management/users', 'UsersManagement::managementPage');
