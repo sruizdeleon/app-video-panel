@@ -33,7 +33,7 @@
       </div>
       <div class="form-group">
         <br>
-        <button id="button" type="submit" class="btn btn-primary">Register</button>
+        <button name="button" id="button" type="submit" class="btn btn-primary">Register</button>
       </div>
     </form>
   </div>
@@ -48,7 +48,7 @@
 
   label.error {
     color: red;
-    font-size: x-small;
+    font-size: small;
   }
 </style>
 <script type="text/javascript" src="/app-video-panel/public/js/validations/Register.js"></script>
