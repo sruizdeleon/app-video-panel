@@ -51,5 +51,5 @@
     font-size: small;
   }
 </style>
-<script type="text/javascript" src="/app-video-panel/public/js/validations/Register.js"></script>
-<script type="text/javascript" src="/app-video-panel/public/js/validations/Events.js"></script>
+<script type="text/javascript" src="/app-video-panel/public/js/validations/User.js"></script>
+<script type="text/javascript" src="/app-video-panel/public/js/events/password/ShowPasswordAndConfirmation.js"></script>
