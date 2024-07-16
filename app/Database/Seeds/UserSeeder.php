@@ -13,17 +13,17 @@ class UserSeeder extends Seeder
                 'name'     => 'Sergio',
                 'surname'  => 'Ruiz',
                 'email'    => 'sergio@mail.com',
-                'password' => password_hash('12345', PASSWORD_DEFAULT),
+                'password' => password_hash('Password.123', PASSWORD_DEFAULT),
                 'role'     => 'admin',
-                'avatar'    => 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png',
+                'avatar'    => 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png',
             ],
             [
-                'name'     => 'Pablo',
+                'name'     => 'Paula',
                 'surname'  => 'García',
-                'email'    => 'pablo@mail.com',
-                'password' => password_hash('12345', PASSWORD_DEFAULT),
+                'email'    => 'paula@mail.com',
+                'password' => password_hash('Password.123', PASSWORD_DEFAULT),
                 'role'     => 'user',
-                'avatar'    => 'https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Programmer-512.png',
+                'avatar'    => 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png',
             ],
         ];
 
